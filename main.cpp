@@ -1,4 +1,9 @@
+/*
+  @autor  Boris Huezo
+  @description Libreria con todo lo necesario para posicionar componentes en la consola
+*/
 #include "lib/general.h"
+// En esta ocasión no use menuC
 
 using namespace std;
 
@@ -50,7 +55,7 @@ int main()
     // Creando maquetación de menú
     positionXY(30, 0);
     color(3);
-    cout << "Examen Final";
+    cout << "Proyecto Final";
     positionXY(1, 2);
     printC(L"*En este programa te mueves con las teclas (Arriba, Abajo, Izquierda, Derecha)", 5);
     // Encabezado de la tabla
@@ -62,7 +67,7 @@ int main()
     cout << "Total: $" << totalArticulos(data, limite);
     // Evitamos que se imprima algun mensaje
     system("pause>nul");
-    //Programamos flecha hacia abajo
+    //Programamos flechas del teclado
     if (menu == 0 && GetAsyncKeyState(VK_DOWN) && !GetAsyncKeyState(VK_UP) && !GetAsyncKeyState(VK_LEFT) && !GetAsyncKeyState(VK_RIGHT) && !GetAsyncKeyState(VK_RETURN))
     {
       // Mover abajo
@@ -132,21 +137,21 @@ int main()
           // Soliicitamos el #
           cin >> eliminar;
           // Volvemos el dato a entero
-          int d = stoi(eliminar);
+          int delete_art = stoi(eliminar);
           // validamos que este dentro del limite
-          if (d != 0 && d <= limite)
+          if (delete_art != 0 && delete_art <= limite)
           {
-            int f = 0;
+            int contador = 0;
             // creamos nuevo arreglo
             costoPorArticulo newAr[limite - 1];
             // ingresamos datos sin el eliminado al nuevo arreglo
             for (int i = 0; i < limite; i++)
             {
-              if (i + 1 != d)
+              if (i + 1 != delete_art)
               {
                 cout << "test";
-                newAr[f] = data[i];
-                f++;
+                newAr[contador] = data[i];
+                contador++;
               }
             }
             // depositamos los datos en el arreglo global
@@ -194,7 +199,7 @@ int main()
   positionXY(0, cantidad_productos + 16);
   return 0;
 }
-// Funcion pasa saber en que boton esta colocado
+// Funcion pasa saber la posición en el menu
 void select(int i, int cantidad_productos, int limite)
 {
   int colorSelect = 6;
@@ -288,10 +293,10 @@ void mostrarData(costoPorArticulo data[], int longData)
 // Función  retorna el calculo total de la compra de todos los productos
 float totalArticulos(costoPorArticulo data[], int longData)
 {
-  float x = 0;
+  float total = 0;
   for (int i = 0; i < longData; i++)
   {
-    x += data[i].costoPorArticulo;
+    total += data[i].costoPorArticulo;
   }
-  return x;
+  return total;
 }
